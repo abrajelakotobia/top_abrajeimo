@@ -14,8 +14,12 @@ Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
-
     Route::post('register', [RegisteredUserController::class, 'store']);
+
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
+
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
   // Affiche le formulaire de vérification OTP
 Route::get('/verify-otp', [RegisteredUserController::class, 'showOtpVerificationForm'])->name('verification.otp');
@@ -23,10 +27,7 @@ Route::get('/verify-otp', [RegisteredUserController::class, 'showOtpVerification
 // Traite la vérification de l'OTP
 Route::post('/verify-otp', [RegisteredUserController::class, 'verifyOtp'])->name('otp.verify');
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
