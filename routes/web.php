@@ -12,19 +12,8 @@ use App\Http\Controllers\AdminChatController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
-// Page d'accueil
-Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canLogin'       => Route::has('login'),
-        'canRegister'    => Route::has('register'),
-        'appName'        => config('app.name'),
-        'appVersion'     => config('app.version'),
-        'appDescription' => config('app.description'),
-    ]);
-})->name('home');
 // Public Routes
-Route::get('/index', [HomeController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Authenticated Routes
 Route::middleware(['auth', 'verified'])->group(function () {
